@@ -27,7 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path ('pilots/', pilots_view, name="pilots_list" ),
     path ('register/', register_view, name="register"),
-    path ('login/', login_view, name="login_view"),
-    path ('logout/', logout_view, name="logout_view")
+    path ('login/', login_view, name="login"),
+    path ('logout/', logout_view, name="logout")
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

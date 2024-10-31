@@ -72,8 +72,17 @@
   <header>
     <nav>
       <ul>
-        <li><a href="{% url 'pilots_list' %}">Carros</a></li>
+        {% if user.is_authenticated %}
+        <li> Olá, {{user.username}} </li>
+        {% endif %}
+        {% if not user.is_authenticated %}
+        <li> <a href="{% url 'register'%}"> Cadastro </a></li> 
+        <li> <a href="{% url 'login'%}"> Login </a></li> 
+        {% endif %}
+        <li><a href="{% url 'pilots_list' %}"> Pilotos </a></li>
+        
       </ul>
+      
     </nav>
   </header>
 
