@@ -1,0 +1,10 @@
+{% extends "base.html" %} 
+{% block content%}
+<h2>Tem certeza de que deseja excluir {{ pilot.name }}?</h2>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sim, excluir</button>
+    <a href="{% url 'pilots_list' %}">Cancelar</a>
+</form>
+
+{% endblock %}

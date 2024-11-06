@@ -4,4 +4,4 @@ from pilots.models import Pilot
 class FormCreation (ModelForm):
     class Meta:
         model = Pilot
-        fields = ['name', 'age', 'team']
+        fields = ['name', 'age', 'team' , 'avatar']

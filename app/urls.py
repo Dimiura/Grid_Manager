@@ -18,16 +18,18 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from pilots.views import PilotsView
+from pilots.views import Pilots, new_pilot_view, delete_pilot
 from accounts.views import register_view, login_view, logout_view
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path ('pilots/', PilotsView.as_view, name="pilots_list" ),
+    path ('pilots/', Pilots.as_view(), name="pilots_list" ),
     path ('register/', register_view, name="register"),
     path ('login/', login_view, name="login"),
-    path ('logout/', logout_view, name="logout")
+    path ('logout/', logout_view, name="logout"),
+    path ('new_pilot/', new_pilot_view, name="new_pilot_view"),
+    path ('pilots/<int:pilot_id>/delete/', delete_pilot, name="delete_pilot")
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
