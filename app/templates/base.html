@@ -66,6 +66,14 @@
         background-color: #999;
     }
 
+      footer
+      {
+        position:relative;
+        bottom:0;
+        width:100%;
+        margin-top:30px;
+      }
+
   </style>
 </head>
 <body>
@@ -74,8 +82,8 @@
       <ul>
         {% if user.is_authenticated %}
         <li> Olá, {{user.username}} </li>
-        <li><a href="{% url 'pilots_list' %}"> Pilotos </a></li>
-        <li> <a href=" {% url 'new_pilot_view' %}">Cadastrar novo piloto  </a> </li>
+        <li><a href="{% url 'pilots_list' %}"> Home </a></li>
+        <li> <a href=" {% url 'new_pilot' %}">Cadastrar novo piloto  </a> </li>
         {% endif %}
         {% if not user.is_authenticated %}
         <li> <a href="{% url 'register'%}"> Cadastro </a></li> 

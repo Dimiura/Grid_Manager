@@ -4,7 +4,7 @@
 
 <form method = "Post"> 
     {% csrf_token %}
-    {{new_pilot_form.as_p}}
+    {{ form.as_table }}
 
     <input type="submit" value="Cadastrar">
 </form>
