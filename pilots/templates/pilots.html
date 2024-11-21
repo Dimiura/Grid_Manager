@@ -112,7 +112,6 @@
             <h2>{{ pilot.name }}</h2>
             <p>Idade: {{  pilot.age }} </p>
             <p>Equipe: {{ pilot.team }}</p>
-            <a href="{% url 'delete_pilot' pilot.id%}"> Deletar </a>
           </div>
         </a>
         {% endfor %}

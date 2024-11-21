@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from pilots.views import PilotListView, delete_pilot, NewPilotCreateView, ObserveDetails
+from pilots.views import PilotListView, delete_pilot, NewPilotCreateView, ObserveDetails, PilotUpdateView, DeleteView
 from accounts.views import register_view, login_view, logout_view
 
 
@@ -30,7 +30,8 @@ urlpatterns = [
     path ('login/', login_view, name="login"),
     path ('logout/', logout_view, name="logout"),
     path ('new_pilot/', NewPilotCreateView.as_view(), name="new_pilot"),
-    path ('pilots/<int:pilot_id>/delete/', delete_pilot, name="delete_pilot"),
-    path ('pilots/<int:pk>/', ObserveDetails.as_view(), name="observe_pilot")
+    path ('pilots/<int:pk>/', ObserveDetails.as_view(), name="observe_pilot"),
+    path ('pilots/<int:pk>/update/', PilotUpdateView.as_view(), name="pilot_update"),
+    path ('pilots/<int:pk>/delete/', DeleteView.as_view(), name="pilot_delete"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
