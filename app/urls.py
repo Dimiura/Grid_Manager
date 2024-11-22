@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from pilots.views import PilotListView, delete_pilot, NewPilotCreateView, ObserveDetails, PilotUpdateView, DeleteView
+from pilots.views import PilotListView,NewPilotCreateView, ObserveDetails, PilotUpdateView, DeleteView
 from accounts.views import register_view, login_view, logout_view
 
 

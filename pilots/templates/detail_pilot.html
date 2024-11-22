@@ -89,12 +89,12 @@
       <p><strong>Idade: </strong> {{ object.age }}</p>
       <p><strong>Equipe: </strong> {{ object.team }}</p>
   </div>
+  {% if user.is_authenticated %}
   <div class="buttons-container">
     <a href="{% url 'pilot_update' pk=object.pk %}" class="btn btn-primary"> Editar </a>
     <a href="{% url 'pilot_delete' pk=object.pk %}" class="btn btn-primary"> Deletar </a>
   </div>
-
-
+  {% endif %}
 
 {% endblock %}
 

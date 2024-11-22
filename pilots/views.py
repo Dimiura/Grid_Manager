@@ -3,10 +3,9 @@ from pilots.models import Pilot, Team
 from pilots.forms import FormCreation
 from django.views import View
 from django.urls import reverse, reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
-
-
-
 
 class PilotListView(ListView):
     model = Pilot
@@ -20,22 +19,13 @@ class PilotListView(ListView):
             pilots = pilots.filter(model__icontains=search)
         return pilots
 
+@method_decorator(login_required(login_url='login'), name='dispatch')   
 class DeleteView(DeleteView):
     model = Pilot
     template_name = 'delete_pilot.html'
     success_url = '/pilots/'
 
-def delete_pilot (request, pilot_id):
-        
-    pilot = get_object_or_404(Pilot, id=pilot_id)
-
-    if request.method == "POST":
-        pilot.delete()
-        return redirect ('pilots_list')
-
-    return render(request, 'delete_pilot.html', {'pilot': pilot})   
-    
-
+@method_decorator(login_required(login_url='login'), name='dispatch')   
 class NewPilotCreateView(CreateView):
     model = Pilot
     form_class = FormCreation
@@ -44,7 +34,7 @@ class NewPilotCreateView(CreateView):
 
 class ObserveDetails(DetailView):
     model = Pilot
-    template_name = 'detail_pilot.html'
+    template_name = 'detail_pilot.html'    
 
 class PilotUpdateView(UpdateView):
     model = Pilot
