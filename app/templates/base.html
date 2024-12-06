@@ -1,108 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <title>{% block title %}{% endblock %}</title>
   <style>
-    body {
-        font-family: 'Open Sans', sans-serif;
-        background-color: #f7f7f7;
-        color: #333;
-        margin: 0;
-        padding: 0;
+
+    p, h1, h2, h3, h4 
+    {
+      color:#fff!important;
     }
 
     header {
-        background-color: #0096c7;
-        color: #fff;
-        text-align: center;
+      background-color: #0096c7;
+      color: #fff;
+      text-align: center;
     }
 
     footer {
-        background-color: #ccc;
-        color: #333;
-        padding: 20px;
-        text-align: center;
+      color: #333;
+      padding: 20px;
+      text-align: center;
     }
 
     nav {
-        background-color: #0096c7;
-        color: #fff;
-        height: 50px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+      color: #fff;
+      height: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
     }
 
     nav ul li {
-        margin: 0 10px;
+      margin: 0 10px;
     }
 
     nav ul li a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 16px;
-        padding: 15px;
-        transition: all 0.3s ease;
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 15px;
+      transition: all 0.3s ease;
     }
 
     nav ul li a:hover {
-        background-color: #32bbe8;
+      background-color: #ccc;
     }
 
     nav ul li.active a {
-        background-color: #666;
+      background-color: #ccc;
     }
 
     nav ul li.active a:hover {
-        background-color: #999;
+      background-color: #ccc;
     }
 
-      footer
-      {
-        position:relative;
-        bottom:0;
-        width:100%;
-        margin-top:30px;
-      }
+      
 
   </style>
 </head>
-<body>
-  <header>
-    <nav>
-      <ul>
-        {% if user.is_authenticated %}
-        <li> Olá, {{user.username}} </li>
-        <li><a href="{% url 'pilots_list' %}"> Home </a></li>
-        <li> <a href=" {% url 'new_pilot' %}">Cadastrar novo piloto  </a> </li>
-        {% endif %}
-        {% if not user.is_authenticated %}
-        <li> <a href="{% url 'register'%}"> Cadastro </a></li> 
-        <li> <a href="{% url 'login'%}"> Login </a></li> 
-        {% endif %}
-        
-        
-      </ul>
-      
-    </nav>
+
+<body class="bg-dark">
+  <header class="bg-dark shadow-lg p-2">
+    <div class="container">
+      <div class="container-fluid">
+        <nav>
+          <ul class="align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+            </svg>
+            {% if user.is_authenticated %}
+            <li> Olá, {{user.username}} </li>
+            <li><a href="{% url 'pilots_list' %}"> Home </a></li>
+            <li> <a href=" {% url 'new_pilot' %}">Cadastrar novo piloto </a> </li>
+            {% endif %}
+            {% if not user.is_authenticated %}
+            <li> <a href="{% url 'register'%}"> Cadastro </a></li>
+            <li> <a href="{% url 'login'%}"> Login </a></li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+    </div>
   </header>
-
-  <main>
-    {% block content %}
-    {% endblock %}
+  <main class="h-100 align-items-center d-flex">
+    <div class="container">
+      <div class="container-fluid">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
   </main>
-
-  <footer>
-    <p>&copy; Curso PycodeBR Multimarcas</p>
+  <footer class="bg-dark text-light shadow">
+    <div class="container">
+      <div class="container-fluid">
+        <p>&copy; Grid Manager - Diego Miura </p>
+      </div>
+    </div>
   </footer>
 </body>
+
+<script>
+  < script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  integrity = "sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+  crossorigin = "anonymous" >
+</script>
+</script>
+
 </html>

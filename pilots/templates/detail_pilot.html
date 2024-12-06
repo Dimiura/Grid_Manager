@@ -6,7 +6,7 @@
 
   <style>
     .pilot-card {
-      background-color: #e3e1e1;
+  
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
       border-radius: 10px;
       overflow: hidden;
@@ -84,10 +84,15 @@
     }
   </style>
   <div class="pilot-card">
-      <img src="{{ object.avatar.url }}" alt="{{ object.name}} ">
+      {% if pilot.avatar %}
+      <img src="{{ object.avatar.url }}" alt="{{ object.name }} - {{ object.team }}">
+      {%else%}
+      <img src="https://t3.ftcdn.net/jpg/03/08/79/70/360_F_308797039_9fsJmkRwEcLJT73bk0EbGIqKpQiibfVa.jpg">
+    {%endif%}
       <h2>{{ object.name}} </h2>
       <p><strong>Idade: </strong> {{ object.age }}</p>
       <p><strong>Equipe: </strong> {{ object.team }}</p>
+      <p class="p-2"><strong>Sobre: </strong><br> {{ object.description }}</p>
   </div>
   {% if user.is_authenticated %}
   <div class="buttons-container">
