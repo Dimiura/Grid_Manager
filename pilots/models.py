@@ -15,6 +15,7 @@ class Pilot(models.Model):
       team = models.ForeignKey(Team, on_delete=models.PROTECT, related_name='pilots_team')
       avatar = models.ImageField (upload_to='pilots/', blank=True, null=True)
       description = models.TextField(null=True, blank=True)
+      market_value = models.FloatField(null=True, blank=True)
     
       def __str__(self):
             return self.name
