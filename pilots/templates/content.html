@@ -1,0 +1,21 @@
+{% extends "base.html" %} 
+{% block content %}
+    <section id="hero">
+        {% include 'C:\Users\dimiu\studying\crudjango\ProjetoCRUD\pilots\templates\partials\herobanner.html' %}
+    </section>
+
+    <div class="container">
+        <div class="container-fluid">
+            <section>
+                {% include 'C:\Users\dimiu\studying\crudjango\ProjetoCRUD\pilots\templates\pilots.html'%}
+            </section>
+            <section>
+                {% include 'C:\Users\dimiu\studying\crudjango\ProjetoCRUD\pilots\templates\teams.html'%}
+            </section>
+        </div>
+    </div>
+
+    
+
+    
+{%endblock%}

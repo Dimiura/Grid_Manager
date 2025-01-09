@@ -1,6 +1,4 @@
-  {% extends "base.html" %}
 
-  {% block content %}
   <style>
     .pilot-grid {
       display: grid;
@@ -9,6 +7,7 @@
       margin: auto;
       max-width: 1200px;
       padding: 20px;
+      flex:1;
     }
 
     .pilot-card {
@@ -17,6 +16,7 @@
       overflow: hidden;
       text-align: center;
       transition: all 0.3s ease;
+      min-height:350px;
     }
 
     .pilot-card:hover {
@@ -100,7 +100,7 @@
 
   {% if pilots %}
   <div class="pilot-grid" style="text-align:center">
-    {% for pilot in pilots %}
+    {% for pilot in pilots %} 
     <a href="{% url 'observe_pilot' pilot.pk%}" class="text-decoration-none">
       <div class="pilot-card">
         {% if pilot.avatar %}
@@ -108,16 +108,22 @@
           {% else %}
           <img src="https://t3.ftcdn.net/jpg/03/08/79/70/360_F_308797039_9fsJmkRwEcLJT73bk0EbGIqKpQiibfVa.jpg">
         {%endif%}
+        {% if pilot.legend == True %}
+        <h2>{{ pilot.name }} ⭐ <br><span class="text-secondary" style="font-size:12px;"> Este piloto foi considerado como "legend" pela entidade.</span></h2>
+        {% else %}
         <h2>{{ pilot.name }}</h2>
-        <p>Idade: {{  pilot.age }} </p>
-        <p>Equipe: {{ pilot.team }}</p>
+        {% endif%}
+        <p>Idade: {{  pilot.age }} ({{pilot.situation}})</p>
+        <div class="d-flex justify-content-center">
+          <p style="margin-right:5px;">{{ pilot.team.namet }}</p>
+          <img src="{{ pilot.team.logo.url }}" alt="{{ pilot.team.namet }}" style="max-width: 20px; max-height: 20px; object-fit:contain">
+        </div>
       </div>
     </a>
-    {% endfor %}~
+    {% endfor %}
   </div>
   {% else %}
   <div class="no-pilots-grid">
     <p class="no-results" style="text-align:center">Nenhum Piloto Registrado.</p>
   </div>
   {% endif %}
-  {% endblock %}

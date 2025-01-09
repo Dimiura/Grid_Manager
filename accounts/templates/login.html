@@ -2,14 +2,32 @@
 
 {% block content %}
 
-    <form method="post">
+<div class="container d-flex justify-content-center">
+    <form method="post" class="text-center justify-content-center">
         {% csrf_token %}
 
         <table>
-            {{login_form.as_table}}
-        </table>
-
-        <input type="submit" value="Entrar">
+            {% for field in login_form %}
+            <tr>
+                <td>
+                    {{ field.label }}<br>  
+                    {{ field }}            
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+        <input type="submit" value="Entrar" class="btn btn-primary mt-3">
     </form>
+</div>
+    <style>
+        
+
+        form table td  {
+           
+            margin-bottom: 10px; 
+            color:#fff;
+        }
+    </style>
 
 {% endblock %}
+

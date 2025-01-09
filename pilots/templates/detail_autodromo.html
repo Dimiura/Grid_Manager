@@ -5,7 +5,7 @@
 {% block content %}
 
   <style>
-    .pilot-card {
+    .autodromo-card {
   
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
       border-radius: 10px;
@@ -19,25 +19,25 @@
       overflow-y:scroll;
     }
 
-    .pilot-card:hover {
+    .autodromo-card:hover {
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
       transform: translateY(-2px);
     }
 
-    .pilot-card img {
+    .autodromo-card img {
       width: 100%;
       height: 200px;
       object-fit: contain;
       object-position: 50% 30%;
     }
 
-    .pilot-card h2 {
+    .autodromo-card h2 {
       font-size: 1.5rem;
       margin: 10px;
     }
 
-    .pilot-card p {
+    .autodromo-card p {
       font-size: 1rem;
       margin-bottom: 10px;
     }
@@ -85,27 +85,17 @@
       text-decoration: none !important;
     }
   </style>
-  <div class="pilot-card">
-      {% if pilot.avatar %}
-      <img src="{{ object.avatar.url }}" alt="{{ object.name }} - {{ object.team }}">
+  <div class="autodromo-card">
+      {% if autodromo.image %}
+      <img src="{{ object.image.url }}" alt="{{ object.name_autodromo }} ">
       {%else%}
       <img src="https://t3.ftcdn.net/jpg/03/08/79/70/360_F_308797039_9fsJmkRwEcLJT73bk0EbGIqKpQiibfVa.jpg">
     {%endif%}
-    {% if object.legend == True %}
-        <h2>{{ object.name }} ⭐ <br><span class="text-secondary" style="font-size:12px;"> Este piloto foi considerado como "legend" pela entidade.</span></h2>
-        {% else %}
-      <h2>{{ object.name}} </h2>
-      {%endif%}
-      <p><strong>Idade: </strong> {{ object.age }} ({{ object.situation }})</p>
-      <p><strong>Equipe: </strong> {{ object.team }}</p>
-      <p class="p-2"><strong>Sobre: </strong><br> {{ object.description }}</p>
-      <p class="p-2"><strong>Data de Nascimento </strong><br> {{ object.data_de_nascimento }}</p>
+      <h2>{{ object.name_autodromo}} </h2>
+      <p class="p-2"><strong>Sobre: </strong><br> {{ object.description_autodromo }}</p>
+      <p class="p-2"><strong>Data de Criação </strong><br> {{ object.ano_de_criacao_autodromo }}</p>
   </div>
   {% if user.is_authenticated %}
-  <div class="buttons-container">
-    <a href="{% url 'pilot_update' pk=object.pk %}" class="btn btn-primary"> Editar </a>
-    <a href="{% url 'pilot_delete' pk=object.pk %}" class="btn btn-danger"> Deletar </a>
-  </div>
   {% endif %}
 
 {% endblock %}

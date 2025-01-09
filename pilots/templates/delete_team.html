@@ -1,10 +1,10 @@
 {% extends "base.html" %} 
 {% block content%}
-<h2>Tem certeza de que deseja excluir {{ pilot.name }}?</h2>
+<h2>Tem certeza de que deseja excluir {{ team.namet }}?</h2>
 <form method="post">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Sim, excluir</button>
-    <a href="{% url 'pilots_list' %}">Cancelar</a>
+    <a href="{% url 'teams_list' %}">Cancelar</a>
 </form>
 
 {% endblock %}

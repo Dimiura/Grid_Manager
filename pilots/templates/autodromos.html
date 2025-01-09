@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+  .autodromo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: auto;
+    max-width: 1200px;
+    padding: 20px;
+    flex:1;
+  }
+
+  .autodromo-card {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    transition: all 0.3s ease;
+    min-height:200px;
+  }
+
+  .autodromo-card:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .autodromo-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    object-position: 50% 30%;
+  }
+
+  .autodromo-card h3 {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+
+  .autodromo-card h2 {
+    font-size: 1.5rem;
+    margin: 10px;
+  }
+
+  .autodromo-card p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .autodromo-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 20px;
+  }
+
+  input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #e3e1e1;
+    border-radius: 4px;
+    margin-right: 10px;
+    transition: border-bottom-color 0.3s ease-in-out;
+  }
+
+  input[type="text"]:focus {
+    outline: none;
+    border-bottom-color: #e3e1e1;
+  }
+
+  button[type="submit"] {
+    background-color: #0096c7;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #108eb8;
+  }
+</style>
+
+<form method="GET" action="{% url 'autodromos_list' %}">
+  <input type="text" name="search" placeholder="Buscar autódromo...">
+  <button type="submit">Buscar</button>
+</form>
+
+{% if autodromos %}
+    <div class="autodromo-grid" style="text-align:center">
+    {% for autodromo in autodromos %} 
+      <a href="{% url 'observe_autodromo' autodromo.pk%}" class="text-decoration-none">
+          <div class="autodromo-card">
+          {% if autodromo.image %}
+              <img src="{{ autodromo.image.url }}" alt="{{ autodromo.name_autodromo }} ">
+              {% else %}
+              <img src="https://t3.ftcdn.net/jpg/03/08/79/70/360_F_308797039_9fsJmkRwEcLJT73bk0EbGIqKpQiibfVa.jpg">
+          {%endif%}
+          <h2>{{ autodromo.name_autodromo }}</h2>
+          </div>
+      </a>
+    {% endfor %}
+    </div>
+{% else %}
+<div class="no-autodromos-grid">
+  <p class="no-results" style="text-align:center">Nenhum autódromo registrado.</p>
+</div>
+{% endif %}
+{% endblock %}

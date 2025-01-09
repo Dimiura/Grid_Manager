@@ -1,5 +1,5 @@
 from django.contrib import admin
-from pilots.models import Pilot, Team
+from pilots.models import Pilot, Team, Autodromo
 
 class PilotAdmin(admin.ModelAdmin):
     list_display = ( 'name', 'age', 'team')
@@ -12,5 +12,13 @@ class TeamAdmin(admin.ModelAdmin):
     list_display = ( 'namet', )
     search_fields = ('namet', )
 
+
+class AutodromoAdmin(admin.ModelAdmin):
+    list_display = ( 'name_autodromo', )
+    search_fields = ('name_autodromo', )
+
+
+
+admin.site.register(Autodromo, AutodromoAdmin)
 
 admin.site.register(Team, TeamAdmin)

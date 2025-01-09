@@ -1,0 +1,40 @@
+<div class="container-fluid p-0">
+    <div class="herobanner position-relative">
+        <div class="container text-center text-light">
+            <h2 data-aos="fade-up" data-aos-duration="2000">Bem-vindo ao Grid Manager</h2>
+            <p  data-aos="fade-up" data-aos-duration="3000">Gerencie pilotos, equipes e muito mais de forma simples e eficaz.</p>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .herobanner {
+        position: relative;
+        background: url('https://wallpapers.com/images/hd/ferrari-f1-car-f2004-xczc1c1wliw79cbc.jpg') no-repeat center center;
+        background-size: cover;
+        height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #fff;
+        z-index: 1;
+    }
+    .herobanner .container {
+        position: relative;
+        z-index: 2; /* Garante que o texto fique acima da imagem */
+    }
+    
+    .herobanner::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Overlay escuro */
+        z-index: 1; /* Overlay abaixo do texto */
+    }
+</style>
