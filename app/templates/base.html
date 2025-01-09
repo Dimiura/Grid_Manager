@@ -133,12 +133,13 @@
   </style>
 </head>
 
-<body class="bg-dark h-100" style="display:flex; flex-direction:column; margin:0;">
+<body class="h-100" style="display:flex; flex-direction:column; margin:0;background-color:#05090A" >
     <header id="main-header" class="scrolled fixed-top p-2">
       <div class="container">
         <div class="container-fluid">
           <nav>
-            <ul class="custom-nav" data-aos="fade-up" data-aos-duration="1000">
+            <ul class="custom-nav" data-aos="fade-up"
+            data-aos-anchor-placement="center-bottom">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                   <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
                   <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
@@ -152,8 +153,8 @@
                 <li><a href="{% url 'new_team' %}" class="underline_effect">Cadastrar nova equipe</a></li>
                 <li><a href="{% url 'logout' %}" class="underline_effect">Sair</a></li>
               {% else %}
-              <li class="auth-links"><a href="{% url 'register' %}">Cadastro</a></li>
-              <li class="auth-links"><a href="{% url 'login' %}">Login</a></li>
+              <li class="auth-links"><a href="{% url 'register' %}" class="underline_effect">Cadastro</a></li>
+              <li class="auth-links"><a href="{% url 'login' %}" class="underline_effect">Login</a></li>
               {% endif %}
           </ul>
           </nav>
@@ -181,7 +182,7 @@
 
   <script>
     AOS.init();
-</script>
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

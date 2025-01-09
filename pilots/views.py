@@ -9,15 +9,21 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 
 class PilotListView(ListView):
     model = Pilot
-    template_name = 'content.html'
+    template_name = 'pilots.html'
     context_object_name = 'pilots'
 
     def get_queryset(self):
         pilots = super().get_queryset().order_by('name')
         search = self.request.GET.get('search')
         if search:
-            pilots = pilots.filter(model__icontains=search)
+            pilots = pilots.filter(name__icontains=search)
         return pilots
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if context['pilots']:
+            context['first_pilot'] = context['pilots'][0]
+        return context
     
 def content(request):
     teams = Team.objects.all()
