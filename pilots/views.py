@@ -22,9 +22,11 @@ class PilotListView(ListView):
 def content(request):
     teams = Team.objects.all()
     pilots = Pilot.objects.all()
+    autodromos = Autodromo.objects.all()
     context = {
         'pilots': pilots,
         'teams': teams,
+        'autodromos':autodromos, 
     }
     return render(request, 'content.html', context)
     

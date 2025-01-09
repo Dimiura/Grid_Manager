@@ -1,4 +1,55 @@
 
+{% if pilots %}
+<div class="row">
+  <div class="col-sm-12">
+    <div class="d-flex justify-content-center p-3">
+      <h2> Pilotos <span class="underline_effect_static"></span></h2>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+
+      </div>
+      <div class="col-sm-6">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{% comment %} <div class="pilot-grid" style="text-align:center">
+  {% for pilot in pilots %} 
+  <a href="{% url 'observe_pilot' pilot.pk%}" class="text-decoration-none">
+    <div class="pilot-card">
+      {% if pilot.avatar %}
+        <img src="{{ pilot.avatar.url }}" alt="{{ pilot.name }} - {{ pilot.team }}">
+        {% else %}
+        <img src="https://t3.ftcdn.net/jpg/03/08/79/70/360_F_308797039_9fsJmkRwEcLJT73bk0EbGIqKpQiibfVa.jpg">
+      {%endif%}
+      {% if pilot.legend == True %}
+      <h2>{{ pilot.name }} ⭐ <br><span class="text-secondary" style="font-size:12px;"> Este piloto foi considerado como "legend" pela entidade.</span></h2>
+      {% else %}
+      <h2>{{ pilot.name }}</h2>
+      {% endif%}
+      <p>Idade: {{  pilot.age }} ({{pilot.situation}})</p>
+      <div class="d-flex justify-content-center">
+        <p style="margin-right:5px;">{{ pilot.team.namet }}</p>
+        <img src="{{ pilot.team.logo.url }}" alt="{{ pilot.team.namet }}" style="max-width: 20px; max-height: 20px; object-fit:contain">
+      </div>
+    </div>
+  </a>
+  {% endfor %}
+</div> {% endcomment %}
+{% else %}
+<div class="no-pilots-grid">
+  <p class="no-results" style="text-align:center">Nenhum Piloto Registrado.</p>
+</div>
+{% endif %}
+
+
   <style>
     .pilot-grid {
       display: grid;
@@ -93,37 +144,6 @@
     }
   </style>
 
-  <form method="GET" action="{% url 'pilots_list' %}">
-    <input type="text" name="search" placeholder="Buscar piloto...">
-    <button type="submit">Buscar</button>
-  </form>
 
-  {% if pilots %}
-  <div class="pilot-grid" style="text-align:center">
-    {% for pilot in pilots %} 
-    <a href="{% url 'observe_pilot' pilot.pk%}" class="text-decoration-none">
-      <div class="pilot-card">
-        {% if pilot.avatar %}
-          <img src="{{ pilot.avatar.url }}" alt="{{ pilot.name }} - {{ pilot.team }}">
-          {% else %}
-          <img src="https://t3.ftcdn.net/jpg/03/08/79/70/360_F_308797039_9fsJmkRwEcLJT73bk0EbGIqKpQiibfVa.jpg">
-        {%endif%}
-        {% if pilot.legend == True %}
-        <h2>{{ pilot.name }} ⭐ <br><span class="text-secondary" style="font-size:12px;"> Este piloto foi considerado como "legend" pela entidade.</span></h2>
-        {% else %}
-        <h2>{{ pilot.name }}</h2>
-        {% endif%}
-        <p>Idade: {{  pilot.age }} ({{pilot.situation}})</p>
-        <div class="d-flex justify-content-center">
-          <p style="margin-right:5px;">{{ pilot.team.namet }}</p>
-          <img src="{{ pilot.team.logo.url }}" alt="{{ pilot.team.namet }}" style="max-width: 20px; max-height: 20px; object-fit:contain">
-        </div>
-      </div>
-    </a>
-    {% endfor %}
-  </div>
-  {% else %}
-  <div class="no-pilots-grid">
-    <p class="no-results" style="text-align:center">Nenhum Piloto Registrado.</p>
-  </div>
-  {% endif %}
+
+  

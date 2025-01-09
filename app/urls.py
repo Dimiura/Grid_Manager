@@ -25,10 +25,10 @@ from accounts.views import register_view, login_view, logout_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path ('pilots/', PilotListView.as_view(), name="pilots_list" ),
-    path ('teams/', TeamsListView.as_view(), name="teams_list" ),
+    # path ('pilots/', PilotListView.as_view(), name="pilots_list" ),
+    # path ('teams/', TeamsListView.as_view(), name="teams_list" ),
     path ('home/', content , name="content" ),
-    path ('autodromos/', AutodromosListView.as_view(), name="autodromos_list" ),
+    # path ('autodromos/', AutodromosListView.as_view(), name="autodromos_list" ),
     path ('register/', register_view, name="register"),
     path ('login/', login_view, name="login"),
     path ('logout/', logout_view, name="logout"),

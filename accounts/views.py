@@ -9,7 +9,7 @@ def register_view (request):
         user_form = UserCreationForm(request.POST)
         if user_form.is_valid():
             user_form.save()
-            return redirect('pilots_list')
+            return redirect('content')
     else:
             user_form = UserCreationForm()
     return render(request, 'register.html', {'user_form': user_form}) 
@@ -23,7 +23,7 @@ def login_view (request):
 
         if user is not None:
             login (request, user)
-            return redirect('pilots_list')
+            return redirect('content')
         else:
           login_form = AuthenticationForm()
 
@@ -34,4 +34,4 @@ def login_view (request):
 
 def logout_view(request):
     logout(request)
-    return redirect('pilots_list')
+    return redirect('content')

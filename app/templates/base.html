@@ -96,28 +96,39 @@
       align-items: center;
     }
 
-    nav ul li a {
+    .underline_effect {
       position: relative;
       color: white;
       text-decoration: none;
       display: inline-block;
       padding: 5px 10px;
   }
-  
-  nav ul li a::after {
+
+    .underline_effect_static {
+    position: relative;
+    content: '';
+    width: 100%;
+    display: block;
+    bottom: -5px;
+    left: 0;
+    background-color: white;
+    height: 2px;
+    }
+    
+    .underline_effect::after {
       content: '';
       position: absolute;
       width: 0;
       height: 1px;
-      bottom: -5px; /* Espaço entre o link e a linha */
+      bottom: -5px; 
       left: 0;
       background-color: white;
       transition: width 0.3s ease-in-out;
   }
   
-  nav ul li a:hover::after {
-      width: 100%;
-  }
+    .underline_effect:hover::after {
+        width: 100%;
+    }
 
   </style>
 </head>
@@ -127,19 +138,19 @@
       <div class="container">
         <div class="container-fluid">
           <nav>
-            <ul class="custom-nav" data-aos="fade-up" data-aos-duration="3000">
+            <ul class="custom-nav" data-aos="fade-up" data-aos-duration="1000">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                   <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
                   <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
               </svg>
                 {% if user.is_authenticated %}
                 <li>Olá, {{ user.username }}</li>
-                <li><a href="{% url 'pilots_list' %}">Pilotos</a></li>
-                <li><a href="{% url 'teams_list' %}">Equipes</a></li>
-                <li><a href="{% url 'autodromos_list' %}">Autódromos</a></li>
-                <li><a href="{% url 'new_pilot' %}">Cadastrar novo piloto</a></li>
-                <li><a href="{% url 'new_team' %}">Cadastrar nova equipe</a></li>
-                <li><a href="{% url 'logout' %}">Sair</a></li>
+                <li><a href="#pilots" class="underline_effect">Pilotos</a></li>
+                <li><a href="#teams" class="underline_effect">Equipes</a></li>
+                <li><a href="#autodromos" class="underline_effect">Autódromos</a></li>
+                <li><a href="{% url 'new_pilot' %}" class="underline_effect">Cadastrar novo piloto</a></li>
+                <li><a href="{% url 'new_team' %}" class="underline_effect">Cadastrar nova equipe</a></li>
+                <li><a href="{% url 'logout' %}" class="underline_effect">Sair</a></li>
               {% else %}
               <li class="auth-links"><a href="{% url 'register' %}">Cadastro</a></li>
               <li class="auth-links"><a href="{% url 'login' %}">Login</a></li>
@@ -165,6 +176,7 @@
     </div>
   </footer>
  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
   <script>

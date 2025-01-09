@@ -1,6 +1,26 @@
-{% extends "base.html" %}
 
-{% block content %}
+{% if autodromos %}
+    <div class="autodromo-grid" style="text-align:center">
+    {% for autodromo in autodromos %} 
+      <a href="{% url 'observe_autodromo' autodromo.pk%}" class="text-decoration-none">
+          <div class="autodromo-card">
+          {% if autodromo.image %}
+              <img src="{{ autodromo.image.url }}" alt="{{ autodromo.name_autodromo }} ">
+              {% else %}
+              <img src="https://t3.ftcdn.net/jpg/03/08/79/70/360_F_308797039_9fsJmkRwEcLJT73bk0EbGIqKpQiibfVa.jpg">
+          {%endif%}
+          <h2>{{ autodromo.name_autodromo }}</h2>
+          </div>
+      </a>
+    {% endfor %}
+    </div>
+{% else %}
+<div class="no-autodromos-grid">
+  <p class="no-results" style="text-align:center">Nenhum autódromo registrado.</p>
+</div>
+{% endif %}
+
+
 <style>
   .autodromo-grid {
     display: grid;
@@ -95,29 +115,4 @@
   }
 </style>
 
-<form method="GET" action="{% url 'autodromos_list' %}">
-  <input type="text" name="search" placeholder="Buscar autódromo...">
-  <button type="submit">Buscar</button>
-</form>
 
-{% if autodromos %}
-    <div class="autodromo-grid" style="text-align:center">
-    {% for autodromo in autodromos %} 
-      <a href="{% url 'observe_autodromo' autodromo.pk%}" class="text-decoration-none">
-          <div class="autodromo-card">
-          {% if autodromo.image %}
-              <img src="{{ autodromo.image.url }}" alt="{{ autodromo.name_autodromo }} ">
-              {% else %}
-              <img src="https://t3.ftcdn.net/jpg/03/08/79/70/360_F_308797039_9fsJmkRwEcLJT73bk0EbGIqKpQiibfVa.jpg">
-          {%endif%}
-          <h2>{{ autodromo.name_autodromo }}</h2>
-          </div>
-      </a>
-    {% endfor %}
-    </div>
-{% else %}
-<div class="no-autodromos-grid">
-  <p class="no-results" style="text-align:center">Nenhum autódromo registrado.</p>
-</div>
-{% endif %}
-{% endblock %}
