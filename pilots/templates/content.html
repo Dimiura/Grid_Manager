@@ -1,22 +1,16 @@
 {% extends "base.html" %} 
-{% block content %}
-    <section id="hero">
-        {% include 'C:\Users\dimiu\studying\crudjango\ProjetoCRUD\pilots\templates\partials\herobanner.html' %}
-    </section>
 
-    <div class="container">
-        <div class="container-fluid">
-            <section id="pilots">
+{% block content %}
+            <section id="banner" >
+                {% include 'C:\Users\dimiu\studying\crudjango\ProjetoCRUD\pilots\templates\partials\herobanner_main.html'%}
+            </section>
+            <section id="pilots" class="p-5" style="background-color:#090d0e">
                 {% include 'C:\Users\dimiu\studying\crudjango\ProjetoCRUD\pilots\templates\partials\pilots.html'%}
             </section>
-            <section id="teams">
-                {% include 'C:\Users\dimiu\studying\crudjango\ProjetoCRUD\pilots\templates\teams.html'%}
+            <section id="teams" class="p-5" style="background-color:#05090A">
+                {% include 'C:\Users\dimiu\studying\crudjango\ProjetoCRUD\pilots\templates\partials\teams.html'%}
             </section>
-            <section id="autodromos">
-                {% include 'C:\Users\dimiu\studying\crudjango\ProjetoCRUD\pilots\templates\autodromos.html'%}
-            </section>
-        </div>
-    </div>
-
-    
+            <section id="autodromos" class="p-5" style="background-color:#090d0e">
+                {% include 'C:\Users\dimiu\studying\crudjango\ProjetoCRUD\pilots\templates\partials\autodromos.html'%}
+            </section>  
 {%endblock%}

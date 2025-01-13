@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from pilots.views import PilotListView,NewPilotCreateView, ObserveDetails, PilotUpdateView, DeleteView, NewTeamCreateView, TeamsListView, ObserveDetailsTeam, DeleteViewTeam, TeamUpdateView, AutodromosListView, ObserveDetailsAutodromos, content
+from pilots.views import PilotListView,NewPilotCreateView, ObserveDetails, PilotUpdateView, DeleteView, NewTeamCreateView, TeamsListView, ObserveDetailsTeam, DeleteViewTeam, TeamUpdateView, AutodromosListView, ObserveDetailsAutodromos, content, welcome
 from accounts.views import register_view, login_view, logout_view
 
 
@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path ('pilots/', PilotListView.as_view(), name="pilots_list" ),
     # path ('teams/', TeamsListView.as_view(), name="teams_list" ),
+    path ('welcome/', welcome , name="welcome" ),
     path ('home/', content , name="content" ),
     # path ('autodromos/', AutodromosListView.as_view(), name="autodromos_list" ),
     path ('register/', register_view, name="register"),
@@ -36,7 +37,7 @@ urlpatterns = [
     path ('new_team/', NewTeamCreateView.as_view(), name="new_team"),
     path ('pilots/<int:pk>/', ObserveDetails.as_view(), name="observe_pilot"),
     path ('teams/<int:pk>/', ObserveDetailsTeam.as_view(), name="observe_team"),
-     path ('autodromo/<int:pk>/', ObserveDetailsAutodromos.as_view(), name="observe_autodromo"),
+    path ('autodromo/<int:pk>/', ObserveDetailsAutodromos.as_view(), name="observe_autodromo"),
     path ('pilots/<int:pk>/update/', PilotUpdateView.as_view(), name="pilot_update"),
     path ('pilots/<int:pk>/delete/', DeleteView.as_view(), name="pilot_delete"),
     path ('teams/<int:pk>/update/', TeamUpdateView.as_view(), name="team_update"),

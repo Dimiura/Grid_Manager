@@ -21,10 +21,19 @@ class PilotListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if context['pilots']:
-            context['first_pilot'] = context['pilots'][0]
+        context['first_pilot'] = self.get_queryset().first()  
         return context
-    
+
+def card_piloto(request, piloto_id):
+    piloto = Pilot.objects.filter(id=piloto_id).first()
+    context = {'dados_piloto': piloto}
+
+    return render(request, 'partials/card_piloto.html', context)
+
+def welcome (request):
+    return render(request, 'partials/herobanner_welcome.html',)
+
+@login_required
 def content(request):
     teams = Team.objects.all()
     pilots = Pilot.objects.all()
@@ -95,15 +104,15 @@ class NewTeamCreateView(CreateView):
 
 class ObserveDetails(DetailView):
     model = Pilot
-    template_name = 'detail_pilot.html'    
+    template_name = 'partials/modal_detail_pilot.html'    
 
 class ObserveDetailsTeam(DetailView):
     model = Team
-    template_name = 'detail_team.html'    
+    template_name = 'partials/modal_detail_team.html'    
 
 class ObserveDetailsAutodromos(DetailView):
     model = Autodromo
-    template_name = 'detail_autodromo.html'        
+    template_name = 'partials/modal_detail_autodromo.html'        
         
     
 @method_decorator(login_required(login_url='login'), name='dispatch') 

@@ -1,24 +1,34 @@
-
-{% if autodromos %}
+<div class="container">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 d-flex justify-content-center text-center mb-5">
+            <h2> Autodrómos </h2>
+          </div>
+        </div>
+    {% if autodromos %}
     <div class="autodromo-grid" style="text-align:center">
-    {% for autodromo in autodromos %} 
+      {% for autodromo in autodromos %}
       <a href="{% url 'observe_autodromo' autodromo.pk%}" class="text-decoration-none">
-          <div class="autodromo-card">
+        <div class="autodromo-card">
           {% if autodromo.image %}
-              <img src="{{ autodromo.image.url }}" alt="{{ autodromo.name_autodromo }} ">
-              {% else %}
-              <img src="https://t3.ftcdn.net/jpg/03/08/79/70/360_F_308797039_9fsJmkRwEcLJT73bk0EbGIqKpQiibfVa.jpg">
+          <img src="{{ autodromo.image.url }}" alt="{{ autodromo.name_autodromo }} ">
+          {% else %}
+          <img src="https://t3.ftcdn.net/jpg/03/08/79/70/360_F_308797039_9fsJmkRwEcLJT73bk0EbGIqKpQiibfVa.jpg">
           {%endif%}
           <h2>{{ autodromo.name_autodromo }}</h2>
-          </div>
+        </div>
       </a>
-    {% endfor %}
+      {% endfor %}
     </div>
-{% else %}
-<div class="no-autodromos-grid">
-  <p class="no-results" style="text-align:center">Nenhum autódromo registrado.</p>
+    {% else %}
+    <div class="no-autodromos-grid">
+      <p class="no-results" style="text-align:center">Nenhum autódromo registrado.</p>
+    </div>
+    {% endif %}
+  </div>
 </div>
-{% endif %}
 
 
 <style>
@@ -29,7 +39,7 @@
     margin: auto;
     max-width: 1200px;
     padding: 20px;
-    flex:1;
+    flex: 1;
   }
 
   .autodromo-card {
@@ -38,7 +48,7 @@
     overflow: hidden;
     text-align: center;
     transition: all 0.3s ease;
-    min-height:200px;
+    min-height: 200px;
   }
 
   .autodromo-card:hover {
@@ -114,5 +124,3 @@
     background-color: #108eb8;
   }
 </style>
-
-

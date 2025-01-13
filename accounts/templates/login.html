@@ -1,33 +1,56 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container-fluid d-flex justify-content-center align-items-center"
+    style="height:100vh; background-color:#090d0e">
+    <div class="container_items">
+        <h2 class="text-center mt-5 mb-5"> Faça login! </h2>
+        <form method="post" class="text-center justify-content-center">
+            {% csrf_token %}
 
-<div class="container d-flex justify-content-center">
-    <form method="post" class="text-center justify-content-center">
-        {% csrf_token %}
+            <table>
+                {% for field in login_form %}
+                <tr>
+                    <td>
+                        {{ field.label }}<br>
+                        {{ field }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <input type="submit" value="Entrar" class="btn-login mt-3">
 
-        <table>
-            {% for field in login_form %}
-            <tr>
-                <td>
-                    {{ field.label }}<br>  
-                    {{ field }}            
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
-        <input type="submit" value="Entrar" class="btn btn-primary mt-3">
-    </form>
+            <div class="haveanuser text-center mt-5">
+                <p> Faça seu cadastro aqui: </p><br>
+                <a href="{% url 'login' %}" class="btn-register mt-3"> Cadastre-se </a>
+            </div>
+        </form>
+    </div>
 </div>
-    <style>
-        
+<style>
+    form table td {
 
-        form table td  {
-           
-            margin-bottom: 10px; 
-            color:#fff;
-        }
-    </style>
+        margin-bottom: 10px;
+        color: #fff;
+    }
+
+    .btn-register
+    {
+        background-color:#f2f2f2;
+        border-radius:100px;
+        padding:10px;
+        text-decoration:none;
+        color:#000;
+    }
+
+    .btn-login
+    {
+        background-color:#198751;
+        border-radius:100px;
+        padding:10px;
+        text-decoration:none;
+        color:#fff;
+    }
+</style>
 
 {% endblock %}
-
