@@ -2,104 +2,22 @@
 
 {% block content %}
 
-<style>
-  form {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    max-height: 500px;
-    overflow-y: scroll;
-    color:#fff;
-  }
 
-  form h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-
-  table {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 600px
-    border-collapse: separate;
-    border-spacing: 0 8px;
-  }
-
-  th,
-  td{
-    padding: 4px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-
-
-
-
-
-  input[type="text"],
-  input[type="number"],
-  select,
-  textarea {
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 100%;
-    max-width: 300px;
-    margin-bottom: 8px;
-    transition: border-bottom-color 0.3s ease-in-out;
-    background-color: transparent;
-    color:#fff;
-  }
-
-
-input 
-{
-  color:#fff;
-}
-
-.btn {
-  background-color: rgba(67, 67, 67, 0.1);
-  color: rgb(143, 142, 142);
-  border-radius: 20px;
-  border: none;
-  box-shadow: 0px 1px 1px rgba(67, 67, 67, 0.1);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn:hover {
-  background-color: rgba(67, 67, 67, 0.2);
-  color: #fff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px);
-}
-
-.btn:focus {
-  outline: none;
-  box-shadow: 0px 0px 5px rgba(67, 67, 67, 0.3);
-}
-  .error-message {
-    color: #d9534f;
-    font-size: 14px;
-    margin-top: 5px;
-  }
-
-  a {
-    text-decoration: none !important;
-  }
-</style>
 <div class="container-fluid d-flex justify-content-center align-items-center  "
   style="height:100vh; background-color:#090d0e">
 
-  <form method="post" enctype="multipart/form-data">
+  <form method="post" enctype="multipart/form-data" class="form">
     {% csrf_token %}
-    <h1 class="text-secondary">Editar informações do piloto </h1>
+    <h4 class="text-secondary">Editar informações do piloto </h4>
     <table cellpadding="20">
-      {{ form.as_table }}
+      {% for field in form %}
+      <tr>
+        <td>
+          {{ field.label }}: <br>
+          {{ field }} <br>
+        </td>
+      </tr>
+      {% endfor%}
     </table>
     <div>
       <div class="buttons-container mt-3 d-flex justify-content-center gap-2 ">
@@ -111,4 +29,97 @@ input
   </form>
 </div>
 
-  {% endblock %}
+<style>
+  .form select {
+    border-radius: 5px;
+    border: none;
+    background: #fff;
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .form input[type="file"] {
+    color: #f2f2f2;
+    font-size: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgba(67, 67, 67, 0.2);
+  }
+
+  .form input[type="file"]::-webkit-file-upload-button {
+    background-color: rgba(67, 67, 67, 0.2);
+    color: #f2f2f2;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+  }
+
+  .form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    max-height: 500px;
+    color: #fff;
+    overflow-y: scroll;
+  }
+
+  form h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .form table {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 600px border-collapse: separate;
+    border-spacing: 0 8px;
+  }
+
+  .form th,
+  .form td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(67, 67, 67, 0.1);
+    margin-bottom: 15px;
+  }
+
+  .form input[type="text"],
+  .form input[type="number"],
+  .form input[type="password"],
+  .form select {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid rgb(143, 142, 142);
+    border-radius: 30px;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 8px;
+    transition: border-bottom-color 0.3s ease-in-out;
+    background-color: rgba(67, 67, 67, 0.1);
+    color: #fff;
+  }
+
+  .form textarea {
+    padding: 15px;
+    font-size: 14px;
+    border: 1px solid rgb(143, 142, 142);
+    border-radius: 30px;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 8px;
+    transition: border-bottom-color 0.3s ease-in-out;
+    background-color: rgba(67, 67, 67, 0.1);
+    color: #fff;
+  }
+
+
+  .form input {
+    color: #fff;
+  }
+</style>
+
+{% endblock %}

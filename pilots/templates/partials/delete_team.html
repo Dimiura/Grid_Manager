@@ -1,10 +1,27 @@
 {% extends "base.html" %} 
-{% block content%}
-<h2>Tem certeza de que deseja excluir {{ team.namet }}?</h2>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Sim, excluir</button>
-    <a href="{% url 'content' %}">Cancelar</a>
-</form>
+{% block content %}
 
+<div class="container-fluid d-flex justify-content-center align-items-center  "
+    style="height:100vh; background-color:#090d0e">
+    {% if messages %}
+    <div class="alert-container">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+    
+    <div class="container-deleteview">
+        <h2>Tem certeza de que deseja excluir {{ team.namet }}?</h2>
+        <form method="post">
+            {% csrf_token %}
+            <br></br>
+            <button type="submit" class="btn btn-danger">Sim, excluir</button>
+            <a href="{% url 'content' %} " class="btn">Cancelar</a>
+        </form>
+    </div>
+</div>
 {% endblock %}

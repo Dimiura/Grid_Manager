@@ -11,7 +11,7 @@
             {{ error_message }}
         </div>
         {% endif %}
-        <form method="post" class="text-center justify-content-center">
+        <form method="post" class="text-center form-login justify-content-center">
             {% csrf_token %}
             <table class="w-100">
                 {% for field in login_form %}
@@ -30,7 +30,7 @@
 
             <div class="haveanuser text-center mt-5">
                 <p> Faça seu cadastro aqui: </p><br>
-                <a href="{% url 'login' %}" class="btn-register mt-3"> Cadastre-se </a>
+                <a href="{% url 'login' %}" class="btn mt-3"> Cadastre-se </a>
             </div>
         </form>
     </div>
@@ -41,13 +41,7 @@
         color: #fff;
     }
 
-    .btn-register {
-        background-color: #f2f2f2;
-        border-radius: 100px;
-        padding: 10px;
-        text-decoration: none;
-        color: #000;
-    }
+  
 
     .btn-login {
         background-color: #198751;

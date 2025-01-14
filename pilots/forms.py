@@ -14,7 +14,8 @@ class FormCreation (ModelForm):
             'avatar': 'Imagem de Perfil',
             'description':'Sobre o piloto',
             'market_value':'Valor de mercado',
-            'legend':'Este piloto pode ser considerado como "Legend"?'
+            'legend':'Este piloto pode ser considerado como "Legend"?',
+            'situation': 'Situação (Falecido, Aposentado ou Atividade)'
         }
 
 class FormCreationAutodromo (ModelForm):

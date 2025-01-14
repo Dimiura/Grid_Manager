@@ -13,7 +13,7 @@
       <a href="#" 
       class="btn-view-autodromo" 
       data-url="{% url 'observe_autodromo' autodromo.pk %}">
-        <div class="autodromo-card">
+        <div class="autodromo-card-list">
           {% if autodromo.image %}
           <img src="{{ autodromo.image.url }}" alt="{{ autodromo.name_autodromo }} ">
           {% else %}
@@ -36,7 +36,7 @@
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content" style="background-color:#090d0e">
       <div class="modal-header">
-        <h5 class="modal-title text-light" id="modalAutodromoLabel">Detalhes do Autodromoo</h5>
+        <h5 class="modal-title text-light" id="modalAutodromoLabel">Detalhes do Autodromo</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -58,7 +58,7 @@
     flex: 1;
   }
 
-  .autodromo-card {
+  .autodromo-card-list{
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     overflow: hidden;
@@ -66,27 +66,32 @@
     min-height: 200px;
   }
 
+  .autodromo-card-list:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+  }
   
 
-  .autodromo-card img {
+  .autodromo-card-list img {
     width: 100%;
     height: 200px;
     object-fit: contain;
     object-position: 50% 30%;
   }
 
-  .autodromo-card h3 {
+  .autodromo-card-list h3 {
     font-size: 20px;
     margin-top: 10px;
     margin-bottom: 5px;
   }
 
-  .autodromo-card h2 {
+  .autodromo-card-list h2 {
     font-size: 1.5rem;
     margin: 10px;
   }
 
-  .autodromo-card p {
+  .autodromo-card-list p {
     font-size: 1rem;
     margin-bottom: 10px;
   }

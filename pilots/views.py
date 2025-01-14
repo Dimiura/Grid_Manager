@@ -3,6 +3,8 @@ from django.http import JsonResponse
 from pilots.models import Pilot, Team, Autodromo
 from pilots.forms import FormCreation, FormCreationTeam, FormCreationAutodromo
 from django.views import View
+from django.db.models import ProtectedError
+from django.contrib import messages
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -80,11 +82,21 @@ class DeleteView(DeleteView):
     template_name = 'partials/delete_pilot.html'
     success_url = '/home/'
 
-@method_decorator(login_required(login_url='login'), name='dispatch')   
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class DeleteViewTeam(DeleteView):
     model = Team
-    template_name = 'delete_team.html'
-    success_url = '/teams/'    
+    template_name = 'partials/delete_team.html'
+    success_url = '/teams/'
+
+    def delete(self, request, *args, **kwargs):
+        team = self.get_object()  
+        try:
+            return super().delete(request, *args, **kwargs)
+        except ProtectedError as e:
+            related_pilots = list(e.protected_objects)
+            pilot_names = ", ".join([str(pilot) for pilot in related_pilots])
+            messages.error(request, f"Não é possível excluir a equipe '{team.namet}' porque ela está associada aos seguintes pilotos: {pilot_names}.")
+            return redirect(self.success_url)  
 
 @method_decorator(login_required(login_url='login'), name='dispatch')   
 class NewPilotCreateView(CreateView):

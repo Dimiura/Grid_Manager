@@ -23,128 +23,142 @@
 
   <title>{% block title %}{% endblock %}</title>
   <style>
-
-   
-
-  footer
-  {
-    background-color:#090d0e;
-  }
-
-  .custom-nav {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-
-    .scrolled {
-      background-color: rgba(0, 0, 0, 0.3); 
-      color: white;
-  }
-
-  section  
-  {
-    display:flex;
-    align-items:center;
-  }
   
-    select {
-      border-radius:5px;
-      border:none;
-      background:#fff;
-      font-size:12px;
-      padding:10px;
-    }
+.btn {
+background-color: rgba(67, 67, 67, 0.1);
+color: rgb(143, 142, 142);
+border-radius: 20px;
+border: none;
+box-shadow: 0px 1px 1px rgba(67, 67, 67, 0.1);
+cursor: pointer;
+transition: all 0.3s ease;
+}
 
-    input[type="file"] {
-      color: #000;
-      background-color: #fff;
-      font-size: 12px;
-      border-radius: 5px;
-      cursor: pointer;
-  }
+.btn:hover {
+background-color: rgba(67, 67, 67, 0.2);
+color: #fff;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+transform: translateY(-2px);
+}
+
+.btn:focus {
+outline: none;
+box-shadow: 0px 0px 5px rgba(67, 67, 67, 0.3);
+}
+
+.error-message {
+color: #d9534f;
+font-size: 14px;
+margin-top: 5px;
+}
+
+{% comment %} --------------------  {% endcomment %}
+
+ 
+
+{% comment %} Header {% endcomment %}
+.custom-nav {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav {
+  color: #fff;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.scrolled {
+  background-color: rgba(0, 0, 0, 0.3); 
+  color: white;
+}
+{% comment %} -------------------- {% endcomment %}
+
+{% comment %} Sections {% endcomment %}
+section  
+{
+  display:flex;
+  align-items:center;
+}
+
+footer {
+  color: #333;
+  padding: 20px;
+  text-align: center;
+  padding-top:10px;
+}
+
+{% comment %} -------------------- {% endcomment %}
+
+
+  {% comment %} Geral {% endcomment %}
   
-  input[type="file"]::-webkit-file-upload-button {
-      background-color: #fff;
-      color: #000;
-      border-radius: 5px;
-      padding: 10px;
-      cursor: pointer;
-      border:none;
-  }
+a {
+  text-decoration: none !important;
+}
+
+footer
+{
+  background-color:#090d0e;
+}
+
+html, body {
+  height:100%;
+  margin:0;
+}
+
   
-  input[type="file"]:hover {
-      background-color: #f2f2f2;
-  }
-
-    html, body {
-      height:100%;
-      margin:0;
-    }
-
-    input, textarea
-    {
-      border-radius:5px;
-    }
-    
-    p, h1, h2, h3, h4 
-    {
-      color:#fff!important;
-    }
+p, h1, h2, h3, h4 
+{
+  color:#fff!important;
+}
 
     
-
-    footer {
-      color: #333;
-      padding: 20px;
-      text-align: center;
-      padding-top:10px;
-    }
-
-    nav {
-      color: #fff;
-      height: 50px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .underline_effect {
-      position: relative;
-      color: white;
-      text-decoration: none;
-      display: inline-block;
-      padding: 5px 10px;
-      text-decoration:none;
-    }
-    
-    .underline_effect::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 1px;
-      bottom: -5px; 
-      left: 0;
-      background-color: white;
-      transition: width 0.3s ease-in-out;
-    }
-    
-    .underline_effect:hover::after {
-      width: 100%;
-    }
-    
-    .underline_effect.active::after {
-      width: 100%; 
-    }
-
-    option
-    {
-      color:#000;
-    }
   
+
+.underline_effect {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  padding: 5px 10px;
+  text-decoration:none;
+}
+
+.underline_effect::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -5px; 
+  left: 0;
+  background-color: white;
+  transition: width 0.3s ease-in-out;
+}
+
+.underline_effect:hover::after {
+  width: 100%;
+}
+
+.underline_effect.active::after {
+  width: 100%; 
+}
+
+option
+{
+  color:#000;
+}
+
+.copyright 
+{
+  margin:0px;
+}
+
   </style>
 </head>
 
@@ -196,8 +210,8 @@
     </main>
   <footer class=" text-light shadow"  style="flex-shrink: 0;">
     <div class="container">
-      <div class="container-fluid">
-        <p>&copy; Grid Manager - Diego Miura </p>
+      <div class="container-fluid d-flex align-items-center justify-content-center">
+        <p class="copyright">&copy; Grid Manager - Diego Miura </p>
       </div>
     </div>
   </footer>

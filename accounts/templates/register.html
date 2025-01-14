@@ -5,7 +5,7 @@
     <div class="container-fluid d-flex justify-content-center align-items-center  " style="height:100vh; background-color:#090d0e" >
         <div class="container_items">
             <h2 class="text-center mt-5 mb-5"> Registre-se </h2>
-        <form method="post" class="text-center m-4">
+        <form  class="form-register" method="post" class="text-center m-4">
             {% csrf_token %}
 
             <div class="form-group p-3">
@@ -29,7 +29,7 @@
 
 
             
-            <div class="form-group">
+            <div class="form-group d-flex justify-content-center">
                 <input type="submit" class=" btn-register mt-3" value="Cadastrar">
             </div>
          
@@ -37,7 +37,7 @@
         
         <div class="haveanuser text-center">
             <p> Caso já seja usuário, faça login: </p><br>
-        <a href="{% url 'login' %}" class="btn-login mt-3"> Login </a>
+        <a href="{% url 'login' %}" class="btn btn-success mt-3"> Login </a>
         </div>
     </div>
        
@@ -47,6 +47,7 @@
 <style>
     label{
         color:#fff;
+        text-align:center;
     }
 
     li 

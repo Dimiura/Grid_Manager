@@ -1,8 +1,4 @@
-{% extends 'base.html' %}
 
-
-
-{% block content %}
 
   <style>
 
@@ -29,7 +25,6 @@
     }
 
     .team-card {
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
       border-radius: 10px;
       overflow: hidden;
       text-align: center;
@@ -39,11 +34,7 @@
       margin-bottom: 20px;
     }
 
-    .team-card:hover {
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-      transform: translateY(-2px);
-    }
+  
 
     .team-card img {
       width: 100%;
@@ -87,7 +78,7 @@
       <h2>{{ object.namet}} </h2>
       {%endif%}
       <p class="p-2"><strong>Sobre: </strong><br> {{ object.description_team }}</p>
-      <p class="p-2"><strong>Data de Criação </strong><br> {{ object.ano_de_criacao_team }}</p>
+      <p class="p-2"><strong>Ano de Criação </strong><br> {{ object.ano_de_criacao_team }}</p>
   </div>
   {% if user.is_authenticated %}
   <div class="buttons-container">
@@ -96,6 +87,5 @@
   </div>
   {% endif %}
 
-{% endblock %}
 
 
