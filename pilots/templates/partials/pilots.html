@@ -2,17 +2,17 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-12 d-flex justify-content-center text-center mb-2">
-        <h2 > Pilotos </h2>
+        <h2 data-aos="fade-up"> Pilotos </h2>
       </div>
     </div>
 
     <div class="row">
       <div class="col-sm-12 d-flex justify-content-center text-center">
         <div class="col-sm-6 d-flex justify-content-end text-center mt-2 mb-1">
-          <button class="btn btn-carousel active" style="margin-right:5px;" id="carousel-btn">Carrossel</button>
+          <button class="btn btn-carousel active" style="margin-right:5px;" id="carousel-btn" data-aos="fade-up">Carrossel</button>
         </div>
         <div class="col-sm-6 d-flex justify-content-start text-center mt-2 mb-1">
-          <button class="btn btn-list " style="margin-left:5px;" id="list-btn">Lista</button>
+          <button class="btn btn-list " style="margin-left:5px;" id="list-btn" data-aos="fade-up">Lista</button>
         </div>
       </div>
     </div>
@@ -21,16 +21,16 @@
     <div class="container-content" id="content-container">
       <div class="tab-menu-container" id="carousel-content">
         <div class="row">
-          <div class="col-6">
-            <div id="image-display">
+          <div class="col-sm-6">
+            <div id="image-display" data-aos="fade-up-right">
               <img src="{{ pilots.first.avatar.url }}" alt="{{ pilots.first.name }}" id="main-image">
             </div>
           </div>
 
-          <div class="col-6">
+          <div class="col-sm-6">
             <div class="row">
-              <div class="col-12">
-                <div class="tab-content">
+              <div class="col-sm-12">
+                <div class="tab-content" data-aos="fade-up-left">
                   {% for pilot in pilots %}
                   {% if pilot.legend == True %}
                   <div class="tab-pane" id="tab-{{ forloop.counter }}">
@@ -63,7 +63,7 @@
             </div>
             <div class="row">
               <div class="col-12">
-                <div class="slick-carousel tab-menu d-flex justify-content-center">
+                <div class="slick-carousel tab-menu d-flex justify-content-center" data-aos="fade-up-left">
                   {% for pilot in pilots %}
                     <div class="tab " data-tab-id="tab-{{ forloop.counter }}" data-image="{{ pilot.avatar.url }}">
                       <img src="{{ pilot.avatar.url }}" alt="{{ pilot.name }}" class="tab-image">
@@ -75,18 +75,22 @@
           </div>
         </div>
       </div>
-      <div id="list-content" class="mt-2" style="display: none;">
+      <div id="list-content" class="mt-2" style="display: none;" >
         <div class="container-fluid">
-          <div class="row">
+          <div class="row" data-aos="zoom-in-up">
             {% for pilot in pilots %}
-            <div class="col-sm-3 d-flex justify-content-center">
+            <div class="col-sm-3 d-flex justify-content-center" >
               <div class="card-pilots-list text-center">
                 <div class="card-pilots-list_container mb-3">
                   <div class="card-pilots-list__image mb-3">
                     <img src="{{ pilot.avatar.url }}" alt="{{ pilot.name }}" class="img-fluid">
                   </div>
                   <div class="card-pilots-list__content">
-                    <p>{{pilot.name}}</p>
+                    {% if pilot.legend == True %}
+                    <p>{{pilot.name}} ⭐</p>
+                    {% else %}
+                    <p>{{pilot.name}} </p>
+                    {% endif %}
                     <p>{{ pilot.team}} <img src="{{pilot.team.logo.url}}" alt="{{ pilot.name}}" class="img img-fluid " style="height:20px; width:20px;"></p>
                     <a href="#" 
                     class="btn btn-primary btn-view-pilot" 
@@ -141,6 +145,8 @@
     min-width:100%;
     max-width:100%;
 }
+
+
 
   #image-display {
     height: 100%;
@@ -206,7 +212,7 @@
   }
   
   .slick-carousel .tab-image {
-    width: 100%; /* A imagem ocupa toda a largura da div */
+    width: 100%; 
     height: 80px;
     border-radius: 5px;
     object-fit: cover;
@@ -254,6 +260,23 @@
   .tab-pane.active {
     display: block;
   }
+
+  @media (max-width:768px)
+{ 
+  #main-image
+  {
+    height:60%;
+  }
+  #image-display 
+  {
+    height:auto;
+  }
+
+  .tab-content {
+
+    min-height: auto;
+  }
+}
 </style>
 
 <script>
@@ -309,7 +332,6 @@
     $('.slick-carousel').addClass('slick-4');
   }
   
-    // Comportamento ao clicar no item
     $('.tab').on('click', function () {
       const tabId = $(this).data('tab-id');
       const imageSrc = $(this).data('image');
@@ -320,7 +342,6 @@
       $('#main-image').attr('src', imageSrc);
     });
   
-    // Clique no primeiro item por padrão
     $('.tab:first').click();
   });
   
