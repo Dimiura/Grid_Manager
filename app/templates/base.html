@@ -24,6 +24,8 @@
   <title>{% block title %}{% endblock %}</title>
   <style>
 
+   
+
   footer
   {
     background-color:#090d0e;
@@ -93,11 +95,7 @@
       color:#fff!important;
     }
 
-    header {
-      background-color: #0096c7;
-      color: #fff;
-      text-align: center;
-    }
+    
 
     footer {
       color: #333;
@@ -141,12 +139,17 @@
     .underline_effect.active::after {
       width: 100%; 
     }
+
+    option
+    {
+      color:#000;
+    }
   
   </style>
 </head>
 
 <body class="h-100" style="display:flex; flex-direction:column; margin:0;" >
-    <header id="main-header" class="scrolled fixed-top p-2">
+    <header id="main-header" class="fixed-top">
       <div class="container">
         <div class="container-fluid">
           <nav>

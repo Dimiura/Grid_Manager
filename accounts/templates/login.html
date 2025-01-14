@@ -1,14 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <div class="container-fluid d-flex justify-content-center align-items-center"
-    style="height:100vh; background-color:#090d0e">
+    style="height:100vh; background-color:#090d0e; width:auto;">
     <div class="container_items">
         <h2 class="text-center mt-5 mb-5"> Faça login! </h2>
+        {% if error_message %}
+        <div style="color: red; margin-bottom: 1em;">
+            {{ error_message }}
+        </div>
+        {% endif %}
         <form method="post" class="text-center justify-content-center">
             {% csrf_token %}
-
-            <table>
+            <table class="w-100">
                 {% for field in login_form %}
                 <tr>
                     <td>
@@ -17,6 +22,9 @@
                     </td>
                 </tr>
                 {% endfor %}
+                <tr>
+
+                </tr>
             </table>
             <input type="submit" value="Entrar" class="btn-login mt-3">
 
@@ -29,27 +37,24 @@
 </div>
 <style>
     form table td {
-
         margin-bottom: 10px;
         color: #fff;
     }
 
-    .btn-register
-    {
-        background-color:#f2f2f2;
-        border-radius:100px;
-        padding:10px;
-        text-decoration:none;
-        color:#000;
+    .btn-register {
+        background-color: #f2f2f2;
+        border-radius: 100px;
+        padding: 10px;
+        text-decoration: none;
+        color: #000;
     }
 
-    .btn-login
-    {
-        background-color:#198751;
-        border-radius:100px;
-        padding:10px;
-        text-decoration:none;
-        color:#fff;
+    .btn-login {
+        background-color: #198751;
+        border-radius: 100px;
+        padding: 10px;
+        text-decoration: none;
+        color: #fff;
     }
 </style>
 

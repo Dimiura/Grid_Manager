@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse
 from pilots.models import Pilot, Team, Autodromo
 from pilots.forms import FormCreation, FormCreationTeam, FormCreationAutodromo
 from django.views import View
@@ -9,26 +10,30 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 
 class PilotListView(ListView):
     model = Pilot
-    template_name = 'pilots.html'
-    context_object_name = 'pilots'
+    template_name = 'content.html'  
+    context_object_name = 'pilots' 
 
     def get_queryset(self):
-        pilots = super().get_queryset().order_by('name')
-        search = self.request.GET.get('search')
-        if search:
-            pilots = pilots.filter(name__icontains=search)
-        return pilots
+        search_query = self.request.GET.get('search', '')  
+        if search_query:
+            return Pilot.objects.filter(name__icontains=search_query)  
+        return Pilot.objects.all()  
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['first_pilot'] = self.get_queryset().first()  
         return context
 
-def card_piloto(request, piloto_id):
-    piloto = Pilot.objects.filter(id=piloto_id).first()
-    context = {'dados_piloto': piloto}
+def pilot_search(request):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        pilots = Pilot.objects.filter(name__icontains=search_query)
+    else:
+        pilots = Pilot.objects.all()
 
-    return render(request, 'partials/card_piloto.html', context)
+    data = [{'id': pilot.id, 'name': pilot.name, 'avatar': pilot.avatar.url, 
+             'team': pilot.team.namet, 'team_logo': pilot.team.logo.url} for pilot in pilots]
+    return JsonResponse({'pilots': data})    
 
 def welcome (request):
     return render(request, 'partials/herobanner_welcome.html',)
@@ -36,7 +41,7 @@ def welcome (request):
 @login_required
 def content(request):
     teams = Team.objects.all()
-    pilots = Pilot.objects.all()
+    pilots = Pilot.objects.all().order_by('name')
     autodromos = Autodromo.objects.all()
     context = {
         'pilots': pilots,
@@ -72,8 +77,8 @@ class AutodromosListView(ListView):
 @method_decorator(login_required(login_url='login'), name='dispatch')   
 class DeleteView(DeleteView):
     model = Pilot
-    template_name = 'delete_pilot.html'
-    success_url = '/pilots/'
+    template_name = 'partials/delete_pilot.html'
+    success_url = '/home/'
 
 @method_decorator(login_required(login_url='login'), name='dispatch')   
 class DeleteViewTeam(DeleteView):
@@ -86,7 +91,7 @@ class NewPilotCreateView(CreateView):
     model = Pilot
     form_class = FormCreation
     template_name = 'new_pilot.html'
-    success_url = '/pilots/'
+    success_url = '/home/'
 
 @method_decorator(login_required(login_url='login'), name='dispatch')   
 class NewAutodromoCreateView(CreateView):
@@ -100,7 +105,7 @@ class NewTeamCreateView(CreateView):
     model = Team
     form_class = FormCreationTeam
     template_name = 'new_team.html'
-    success_url = '/pilots/'
+    success_url = '/home/'
 
 class ObserveDetails(DetailView):
     model = Pilot
@@ -119,18 +124,16 @@ class ObserveDetailsAutodromos(DetailView):
 class PilotUpdateView(UpdateView):
     model = Pilot
     form_class = FormCreation
-    template_name = "update_pilot.html"
-    success_url = '/pilots/'
+    template_name = "partials/update_pilot.html"
+    success_url = '/home/'
 
-    def get_success_url(self):
-        return reverse_lazy('observe_pilot', kwargs = {'pk': self.object.pk})
     
 @method_decorator(login_required(login_url='login'), name='dispatch') 
 class TeamUpdateView(UpdateView):
     model = Team
     form_class = FormCreationTeam
-    template_name = "update_team.html"
-    success_url = '/teams/'
+    template_name = "partials/update_team.html"
+    success_url = 'partials/teams/'
 
     def get_success_url(self):
         return reverse_lazy('observe_team', kwargs = {'pk': self.object.pk})   

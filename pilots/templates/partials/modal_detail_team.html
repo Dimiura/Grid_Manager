@@ -5,8 +5,30 @@
 {% block content %}
 
   <style>
-    .team-card {
+
+    .btn {
+      background-color: rgba(67, 67, 67, 0.1);
+      color: rgb(143, 142, 142);
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0px 1px 1px rgba(67, 67, 67, 0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
   
+    .btn:hover {
+      background-color: rgba(67, 67, 67, 0.2);
+      color: #fff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+    }
+  
+    .btn:focus {
+      outline: none;
+      box-shadow: 0px 0px 5px rgba(67, 67, 67, 0.3);
+    }
+
+    .team-card {
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
       border-radius: 10px;
       overflow: hidden;
@@ -47,32 +69,6 @@
       margin-bottom: 20px;
     }
 
-    .btn {
-      display: inline-block;
-      background-color: #0096c7;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s ease-in-out;
-      margin: 0 10px;
-    }
-
-    .btn:hover {
-      background-color: #108eb8;
-    }
-
-    .btn-danger {
-      background-color: #d9534f;
-      text-decoration: none !important;
-    }
-
-    .btn-danger:hover {
-      background-color: #d2221c;
-    }
-
     .error-message {
       color: #d9534f;
       font-size: 14px;
@@ -95,8 +91,8 @@
   </div>
   {% if user.is_authenticated %}
   <div class="buttons-container">
-    <a href="{% url 'team_update' pk=object.pk %}" class="btn btn-primary"> Editar </a>
-    <a href="{% url 'team_delete' pk=object.pk %}" class="btn btn-danger"> Deletar </a>
+    <a href="{% url 'team_update' pk=object.pk %}" class="btn"> Editar </a>
+    <a href="{% url 'team_delete' pk=object.pk %}" class="btn"> Deletar </a>
   </div>
   {% endif %}
 

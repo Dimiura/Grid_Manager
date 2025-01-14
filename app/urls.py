@@ -18,18 +18,16 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from pilots.views import PilotListView,NewPilotCreateView, ObserveDetails, PilotUpdateView, DeleteView, NewTeamCreateView, TeamsListView, ObserveDetailsTeam, DeleteViewTeam, TeamUpdateView, AutodromosListView, ObserveDetailsAutodromos, content, welcome
+from pilots.views import PilotListView,NewPilotCreateView, ObserveDetails, PilotUpdateView, DeleteView, NewTeamCreateView, TeamsListView, ObserveDetailsTeam, DeleteViewTeam, TeamUpdateView, AutodromosListView, ObserveDetailsAutodromos, content, welcome, pilot_search
 from accounts.views import register_view, login_view, logout_view
 
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    # path ('pilots/', PilotListView.as_view(), name="pilots_list" ),
-    # path ('teams/', TeamsListView.as_view(), name="teams_list" ),
+    path ('admin/', admin.site.urls),
     path ('welcome/', welcome , name="welcome" ),
     path ('home/', content , name="content" ),
-    # path ('autodromos/', AutodromosListView.as_view(), name="autodromos_list" ),
+    path ('pilots/search/', pilot_search, name='pilot_search'),
     path ('register/', register_view, name="register"),
     path ('login/', login_view, name="login"),
     path ('logout/', logout_view, name="logout"),

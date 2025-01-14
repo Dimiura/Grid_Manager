@@ -25,8 +25,9 @@ def login_view (request):
             login (request, user)
             return redirect('content')
         else:
+          error_message = "Credenciais inválidas. Tente novamente."
           login_form = AuthenticationForm()
-
+          return render(request, 'login.html', {'login_form': login_form, 'error_message': error_message})
     else:
         login_form = AuthenticationForm()
         return render(request, 'login.html', {'login_form':login_form})
