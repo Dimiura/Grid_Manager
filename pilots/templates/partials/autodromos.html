@@ -130,25 +130,4 @@
           }
         </style>
 
-        <script>
-          showCarousel();
-
-          $(document).on('click', '.btn-view-autodromo', function (e) {
-            e.preventDefault();
-
-            var url = $(this).data('url');
-
-            $.ajax({
-              url: url,
-              type: 'GET',
-              success: function (data) {
-                $('#modalAutodromoContent').html(data);
-
-                $('#modalAutodromo').modal('show');
-              },
-              error: function () {
-                alert('Erro ao carregar os detalhes da equipe.');
-              }
-            });
-          });
-        </script>
+     

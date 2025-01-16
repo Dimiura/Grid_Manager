@@ -178,7 +178,7 @@
 
 
 <script>
-  $(window).on('load', function () {
+  $(document).ready(function() {
     $('.teams-carousel').slick({
       dots: true,
       infinite: true,
@@ -202,9 +202,10 @@
       ],
     });
   });
+    
 
 
-  showCarousel();
+ 
 
   $(document).on('click', '.btn-view-team', function(e) {
     e.preventDefault();
