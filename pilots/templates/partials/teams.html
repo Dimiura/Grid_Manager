@@ -45,7 +45,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div id="modalTeamContent">        </div>
+        <div id="modalTeamContent"></div>
       </div>
     </div>
   </div>
@@ -178,7 +178,7 @@
 
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  $(window).on('load', function () {
     $('.teams-carousel').slick({
       dots: true,
       infinite: true,

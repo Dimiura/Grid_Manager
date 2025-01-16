@@ -280,57 +280,35 @@
 </style>
 
 <script>
- $(document).ready(function () {
-  var numItems = $('.slick-carousel .tab').length;  
-  var slidesToShow = Math.min(numItems, 4); 
-  var slidesToScroll = 1; 
-
-  $('.slick-carousel').slick({
-    infinite: true,
-    slidesToShow: slidesToShow, 
-    slidesToScroll: slidesToScroll,
-    arrows: true,
-    dots: false,
-    centerMode: (numItems === 1),  
-    responsive: [
-      {
-        breakpoint: 768,  
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
+  $(window).on('load', function () {
+    var numItems = $('.slick-carousel .tab').length;  
+    var slidesToShow = Math.min(numItems, 4); 
+    var slidesToScroll = 1; 
+  
+    $('.slick-carousel').slick({
+      infinite: true,
+      slidesToShow: slidesToShow, 
+      slidesToScroll: slidesToScroll,
+      arrows: true,
+      dots: false,
+      centerMode: (numItems === 1),  
+      responsive: [
+        {
+          breakpoint: 768,  
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 480, 
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          }
         }
-      },
-      {
-        breakpoint: 480, 
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        }
-      }
-    ]
-  });
-
-  $('.tab').on('click', function () {
-    const tabId = $(this).data('tab-id');
-    const imageSrc = $(this).data('image');
-
-    $('.tab-pane').hide();
-    $('#' + tabId).fadeIn();
-
-    $('#main-image').attr('src', imageSrc);
-  });
-
-  $('.tab:first').click();
-
-  if (numItems === 1) {
-    $('.slick-carousel').addClass('slick-1');
-  } else if (numItems === 2) {
-    $('.slick-carousel').addClass('slick-2');
-  } else if (numItems === 3) {
-    $('.slick-carousel').addClass('slick-3');
-  } else if (numItems >= 4) {
-    $('.slick-carousel').addClass('slick-4');
-  }
+      ]
+    });
   
     $('.tab').on('click', function () {
       const tabId = $(this).data('tab-id');
@@ -343,99 +321,70 @@
     });
   
     $('.tab:first').click();
-  });
   
-
-  const carouselBtn = document.getElementById('carousel-btn');
-  const listBtn = document.getElementById('list-btn');
-  const carouselContent = document.getElementById('carousel-content');
-  const listContent = document.getElementById('list-content');
-
-  function showCarousel() {
-    carouselBtn.classList.add('active');
-    listBtn.classList.remove('active');
-    carouselContent.style.display = 'block';
-    listContent.style.display = 'none';
-  }
-
-  function showList() {
-    listBtn.classList.add('active');
-    carouselBtn.classList.remove('active');
-    listContent.style.display = 'block';
-    carouselContent.style.display = 'none';
-  }
-
-  carouselBtn.addEventListener('click', showCarousel);
-  listBtn.addEventListener('click', showList);
-
-  showCarousel();
-
-  $(document).on('click', '.btn-view-pilot', function(e) {
-    e.preventDefault();
-
-    var url = $(this).data('url');
-
-    $.ajax({
-      url: url,
-      type: 'GET',
-      success: function(data) {
-        $('#modalPilotContent').html(data);
-
-        $('#modalPilot').modal('show');
-      },
-      error: function() {
-        alert('Erro ao carregar os detalhes do piloto.');
-      }
+    if (numItems === 1) {
+      $('.slick-carousel').addClass('slick-1');
+    } else if (numItems === 2) {
+      $('.slick-carousel').addClass('slick-2');
+    } else if (numItems === 3) {
+      $('.slick-carousel').addClass('slick-3');
+    } else if (numItems >= 4) {
+      $('.slick-carousel').addClass('slick-4');
+    }
+  
+    $('.tab').on('click', function () {
+      const tabId = $(this).data('tab-id');
+      const imageSrc = $(this).data('image');
+  
+      $('.tab-pane').hide();
+      $('#' + tabId).fadeIn();
+  
+      $('#main-image').attr('src', imageSrc);
     });
-  });
-  $(document).ready(function () {
-    $('#search-form').on('submit', function (event) {
-        event.preventDefault(); 
-        const query = $('#search-input').val(); 
-
-        $.ajax({
-            url: "{% url 'pilot_search' %}", 
-            data: { search: query },         
-            success: function (response) {
-                const pilots = response.pilots;
-                const cardsContainer = $('#pilot-cards');
-                cardsContainer.empty(); 
-
-                if (pilots.length > 0) {
-                    $('#no-results').hide(); 
-                    pilots.forEach(function (pilot) {
-                        const card = `
-                            <div class="col-sm-3 d-flex justify-content-center pilot-card">
-                                <div class="card-pilots-list text-center">
-                                    <div class="card-pilots-list_container mb-3">
-                                        <div class="card-pilots-list__image mb-3">
-                                            <img src="${pilot.avatar}" alt="${pilot.name}" class="img-fluid">
-                                        </div>
-                                        <div class="card-pilots-list__content">
-                                            <p>${pilot.name}</p>
-                                            <p>${pilot.team} 
-                                                <img src="${pilot.team_logo}" alt="${pilot.name}" 
-                                                     class="img img-fluid" style="height:20px; width:20px;">
-                                            </p>
-                                            <a href="#" 
-                                               class="btn btn-primary btn-view-pilot" 
-                                               data-url="/observe_pilot/${pilot.id}">
-                                               Ver
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>`;
-                        cardsContainer.append(card); 
-                    });
-                } else {
-                    $('#no-results').show();
-                }
-            },
-            error: function () {
-                alert('Erro ao buscar pilotos. Tente novamente mais tarde.');
-            }
-        });
+  
+    $('.tab:first').click();
+  
+    const carouselBtn = document.getElementById('carousel-btn');
+    const listBtn = document.getElementById('list-btn');
+    const carouselContent = document.getElementById('carousel-content');
+    const listContent = document.getElementById('list-content');
+  
+    function showCarousel() {
+      carouselBtn.classList.add('active');
+      listBtn.classList.remove('active');
+      carouselContent.style.display = 'block';
+      listContent.style.display = 'none';
+    }
+  
+    function showList() {
+      listBtn.classList.add('active');
+      carouselBtn.classList.remove('active');
+      listContent.style.display = 'block';
+      carouselContent.style.display = 'none';
+    }
+  
+    carouselBtn.addEventListener('click', showCarousel);
+    listBtn.addEventListener('click', showList);
+  
+    showCarousel();
+  
+    $(document).on('click', '.btn-view-pilot', function(e) {
+      e.preventDefault();
+  
+      var url = $(this).data('url');
+  
+      $.ajax({
+        url: url,
+        type: 'GET',
+        success: function(data) {
+          $('#modalPilotContent').html(data);
+  
+          $('#modalPilot').modal('show');
+        },
+        error: function() {
+          alert('Erro ao carregar os detalhes do piloto.');
+        }
+      });
     });
   });
   
