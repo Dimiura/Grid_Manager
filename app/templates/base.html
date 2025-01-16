@@ -35,7 +35,7 @@
   }
   
     #main-header.scrolled {
-        background-color: #090d0e;
+        background-color:rgba(9,13,14,0.7);
         color: white;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     }
@@ -173,52 +173,79 @@
     .copyright {
       margin: 0px;
     }
+
+    @media (max-width:768px){
+      #main-header {
+        background-color: #090d0e;
+      }
+      .navbar-nav .nav-link {
+        color: #fff;
+        transition: color 0.3s;
+      }
+
+      .navbar-collapse
+      {
+        padding:20px;
+        background-color: #090d0e;
+      }
+     
+    }
   </style>
 </head>
 
 <body class="h-100" style="display:flex; flex-direction:column; margin:0;">
-  <header id="main-header" class="fixed-top">
+  <header id="main-header" class="fixed-top ">
     <div class="container">
-      <div class="container-fluid">
-        <nav>
-          <ul class="custom-nav animate-on-scroll">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-              class="bi bi-person-circle" viewBox="0 0 16 16">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+          <!-- Ícone do Usuário -->
+          <a class="navbar-brand" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
               <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
               <path fill-rule="evenodd"
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
             </svg>
             {% if user.is_authenticated %}
-            <li>Olá, {{ user.username }}</li>
-            <li><a href="{% url 'content'%}"
-                class="underline_effect {% if request.path == '/home/' %}active{% endif %}">Home</a></li>
-            <li class="{% if request.path == '/new_pilot/' %}active{% endif %}"><a href="{% url 'new_pilot' %}"
-                class="underline_effect">Cadastrar novo piloto</a></li>
-            <li class="{% if request.path == '/new_team/' %}active{% endif %}"><a href="{% url 'new_team' %}"
-                class="underline_effect justify-content-end">Cadastrar nova equipe</a></li>
-            <li><a href="{% url 'logout' %}" class="underline_effect text-end">Sair</a></li>
-            {% else %}
-            <li class="auth-links">
-              <a href="{% url 'register' %}"
-                class="underline_effect {% if request.path == '/register/' %}active{% endif %}">
-                Cadastro
-              </a>
-            </li>
-            <li class="auth-links">
-              <a href="{% url 'login' %}" class="underline_effect {% if request.path == '/login/' %}active{% endif %}">
-                Login
-              </a>
-            </li>
-            <li class="auth-links">
-              <a href="{% url 'welcome' %}"
-                class="underline_effect  {% if request.path == '/welcome/' %}active{% endif %} ">
-                Inicío
-              </a>
-            </li>
+            Olá, {{ user.username }}
             {% endif %}
-          </ul>
-        </nav>
-      </div>
+          </a>
+  
+          <!-- Botão do Menu Hamburguer -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+  
+          <!-- Links do Menu -->
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              {% if user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link  underline_effect  {% if request.path == '/home/' %}active{% endif %}" href="{% url 'content' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link underline_effect  {% if request.path == '/new_pilot/' %}active{% endif %}" href="{% url 'new_pilot' %}">Cadastrar novo piloto</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link underline_effect  {% if request.path == '/new_team/' %}active{% endif %}" href="{% url 'new_team' %}">Cadastrar nova equipe</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link underline_effect"  href="{% url 'logout' %}">Sair</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link underline_effect {% if request.path == '/register/' %}active{% endif %}" href="{% url 'register' %}">Cadastro</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link underline_effect {% if request.path == '/login/' %}active{% endif %}" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link underline_effect {% if request.path == '/welcome/' %}active{% endif %}" href="{% url 'welcome' %}">Início</a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
     </div>
   </header>
   </div>

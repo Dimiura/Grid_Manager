@@ -35,7 +35,7 @@ class Pilot(models.Model):
       pilot_age = models.IntegerField(null=True, blank=True)
       team = models.ForeignKey(Team, on_delete=models.PROTECT, related_name='pilots_team')  
       avatar = models.ImageField (upload_to='pilots/', blank=True, null=True)
-      description = models.CharField(max_length=200, null=True, blank=True)
+      description = models.TextField(null=True, blank=True)
       market_value = models.FloatField(null=True, blank=True) 
       legend = models.BooleanField(null=True, default=False)
       situation = models.CharField(max_length=50, null=True, blank=True)

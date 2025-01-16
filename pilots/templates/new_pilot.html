@@ -3,6 +3,8 @@
 {% block content %}
 
 <div class="container-fluid d-flex justify-content-center align-items-center" style="background-color:#090d0e; height:100vh"> 
+  <div class="container-form">
+    <h3 class='p-3'>Crie seu piloto</h3>
     <form  method = "post" class="text-center "  enctype="multipart/form-data">  
         {% csrf_token %}
         <div class="form">
@@ -12,6 +14,11 @@
                   <td>
                       {{ field.label }}: <br>
                       {{ field }} <br>
+                      {% if field.name == "team" %}
+                      <a href="{% url 'new_team' %}" class="btn mt-2">
+                        Criar Nova Equipe
+                    </a>
+                      {% endif %}
                   </td>
               </tr>
               {% endfor %}
@@ -22,7 +29,10 @@
         <a href="{% url 'content' %}" class="btn btn-primary">Voltar</a>
       </div>
     </form>
+  </div>
 </div>
+
+
 
 <style>
   .form select {
@@ -119,6 +129,8 @@
     color:#fff;
   }
   </style>
+
+
 
 {% endblock%}
 

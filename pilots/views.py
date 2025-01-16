@@ -35,8 +35,10 @@ def pilot_search(request):
              'team': pilot.team.namet, 'team_logo': pilot.team.logo.url} for pilot in pilots]
     return JsonResponse({'pilots': data})    
 
-def welcome (request):
-    return render(request, 'partials/herobanner_welcome.html',)
+def welcome(request):
+    if request.user.is_authenticated:  
+        return redirect('content') 
+    return render(request, 'partials/herobanner_welcome.html')
 
 @login_required
 def content(request):
@@ -97,12 +99,17 @@ class NewPilotCreateView(CreateView):
     template_name = 'new_pilot.html'
     success_url = '/home/'
 
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        form.fields['team'].queryset = Team.objects.filter(user=self.request.user) 
+        return form
+
     def form_valid(self, form):
         team = form.save(commit=False)
         team.user = self.request.user 
         team.save() 
         return super().form_valid(form)
-
+    
 @method_decorator(login_required(login_url='login'), name='dispatch')   
 class NewAutodromoCreateView(CreateView):
     model = Autodromo
@@ -128,6 +135,7 @@ class NewTeamCreateView(CreateView):
         team.user = self.request.user 
         team.save() 
         return super().form_valid(form)
+    
 
 class ObserveDetails(DetailView):
     model = Pilot
@@ -161,7 +169,7 @@ class TeamUpdateView(UpdateView):
     model = Team
     form_class = FormCreationTeam
     template_name = "partials/update_team.html"
-    success_url = 'partials/teams/'
+    success_url = '/home/'
 
     def form_valid(self, form):
         team = form.save(commit=False)
@@ -169,5 +177,3 @@ class TeamUpdateView(UpdateView):
         team.save() 
         return super().form_valid(form)
 
-    def get_success_url(self):
-        return reverse_lazy('observe_team', kwargs = {'pk': self.object.pk})   
