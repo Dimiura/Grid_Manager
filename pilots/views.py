@@ -9,6 +9,7 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class PilotListView(ListView):
     model = Pilot
@@ -16,10 +17,7 @@ class PilotListView(ListView):
     context_object_name = 'pilots' 
 
     def get_queryset(self):
-        search_query = self.request.GET.get('search', '')  
-        if search_query:
-            return Pilot.objects.filter(name__icontains=search_query)  
-        return Pilot.objects.all()  
+        return Pilot.objects.filter(user=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -42,39 +40,33 @@ def welcome (request):
 
 @login_required
 def content(request):
-    teams = Team.objects.all()
-    pilots = Pilot.objects.all().order_by('name')
-    autodromos = Autodromo.objects.all()
+    teams = Team.objects.filter(user=request.user)
+    pilots = Pilot.objects.filter(user=request.user).order_by('name')
+    autodromos = Autodromo.objects.filter(user=request.user)
     context = {
         'pilots': pilots,
         'teams': teams,
         'autodromos':autodromos, 
     }
     return render(request, 'content.html', context)
-    
-class TeamsListView(ListView):
+
+@method_decorator(login_required(login_url='login'), name='dispatch')       
+class TeamsListView(LoginRequiredMixin, ListView):
     model = Team
     template_name = 'content.html'
     context_object_name = 'teams'
 
     def get_queryset(self):
-        teams = super().get_queryset().order_by('namet')
-        search = self.request.GET.get('search')
-        if search:
-            teams = teams.filter(model__icontains=search)
-        return teams
+        return Team.objects.filter(user=self.request.user)
     
+@method_decorator(login_required(login_url='login'), name='dispatch')       
 class AutodromosListView(ListView):
     model = Autodromo
     template_name = 'content.html'
     context_object_name = 'autodromos'
 
     def get_queryset(self):
-        autodromos= super().get_queryset().order_by('name_autodromo')
-        search = self.request.GET.get('search')
-        if search:
-            autodromos = autodromos.filter(model__icontains=search)
-        return autodromos   
+        return Autodromo.objects.filter(user=self.request.user)
 
 @method_decorator(login_required(login_url='login'), name='dispatch')   
 class DeleteView(DeleteView):
@@ -105,6 +97,12 @@ class NewPilotCreateView(CreateView):
     template_name = 'new_pilot.html'
     success_url = '/home/'
 
+    def form_valid(self, form):
+        team = form.save(commit=False)
+        team.user = self.request.user 
+        team.save() 
+        return super().form_valid(form)
+
 @method_decorator(login_required(login_url='login'), name='dispatch')   
 class NewAutodromoCreateView(CreateView):
     model = Autodromo
@@ -112,12 +110,24 @@ class NewAutodromoCreateView(CreateView):
     template_name = 'autodromo.html'
     success_url = '/autodromos/'    
 
+    def form_valid(self, form):
+        team = form.save(commit=False)
+        team.user = self.request.user 
+        team.save() 
+        return super().form_valid(form)
+
 @method_decorator(login_required(login_url='login'), name='dispatch')   
 class NewTeamCreateView(CreateView):
     model = Team
     form_class = FormCreationTeam
     template_name = 'new_team.html'
     success_url = '/home/'
+
+    def form_valid(self, form):
+        team = form.save(commit=False)
+        team.user = self.request.user 
+        team.save() 
+        return super().form_valid(form)
 
 class ObserveDetails(DetailView):
     model = Pilot
@@ -139,6 +149,12 @@ class PilotUpdateView(UpdateView):
     template_name = "partials/update_pilot.html"
     success_url = '/home/'
 
+    def form_valid(self, form):
+        team = form.save(commit=False)
+        team.user = self.request.user 
+        team.save() 
+        return super().form_valid(form)
+
     
 @method_decorator(login_required(login_url='login'), name='dispatch') 
 class TeamUpdateView(UpdateView):
@@ -146,6 +162,12 @@ class TeamUpdateView(UpdateView):
     form_class = FormCreationTeam
     template_name = "partials/update_team.html"
     success_url = 'partials/teams/'
+
+    def form_valid(self, form):
+        team = form.save(commit=False)
+        team.user = self.request.user 
+        team.save() 
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('observe_team', kwargs = {'pk': self.object.pk})   
