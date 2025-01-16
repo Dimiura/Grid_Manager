@@ -5,14 +5,13 @@ from pilots.models import Pilot, Team, Autodromo
 class FormCreation (ModelForm):
     class Meta:
         model = Pilot
-        fields = ['name', 'age', 'team' , 'avatar', 'description', 'market_value', 'legend', 'situation', 'data_de_nascimento']
+        fields = ['name', 'pilot_age', 'team' , 'avatar', 'market_value', 'legend', 'situation', 'data_de_nascimento']
 
         labels = {
             'name':'Nome do Piloto',
-            'age':'Idade',
+            'pilot_age':'Idade',
             'team':'Equipe atual ou Última equipe',
             'avatar': 'Imagem de Perfil',
-            'description':'Sobre o piloto',
             'market_value':'Valor de mercado',
             'legend':'Este piloto pode ser considerado como "Legend"?',
             'situation': 'Situação (Falecido, Aposentado ou Atividade)'

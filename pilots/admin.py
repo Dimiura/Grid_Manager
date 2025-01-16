@@ -2,7 +2,7 @@ from django.contrib import admin
 from pilots.models import Pilot, Team, Autodromo
 
 class PilotAdmin(admin.ModelAdmin):
-    list_display = ( 'name', 'age', 'team')
+    list_display = ( 'name', 'pilot_age', 'team')
     search_fields = ('name', 'team')
 
 
