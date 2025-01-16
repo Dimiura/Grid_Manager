@@ -15,22 +15,23 @@ def register_view (request):
     return render(request, 'register.html', {'user_form': user_form}) 
 
 
-def login_view (request):
-    if request.method=="POST":
-        username=request.POST["username"]
-        password=request.POST["password"]
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            login (request, user)
-            return redirect('content')
+            login(request, user)
+            next_url = request.GET.get('next', 'content') 
+            return redirect(next_url)
         else:
-          error_message = "Credenciais inválidas. Tente novamente."
-          login_form = AuthenticationForm()
-          return render(request, 'login.html', {'login_form': login_form, 'error_message': error_message})
+            error_message = "Credenciais inválidas. Tente novamente."
+            login_form = AuthenticationForm()
+            return render(request, 'login.html', {'login_form': login_form, 'error_message': error_message})
     else:
         login_form = AuthenticationForm()
-        return render(request, 'login.html', {'login_form':login_form})
+        return render(request, 'login.html', {'login_form': login_form})
      
 
 def logout_view(request):
