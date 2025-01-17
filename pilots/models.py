@@ -6,7 +6,7 @@ from datetime import date
 class Team(models.Model):
       id = models.AutoField(primary_key=True)
       namet= models.CharField(max_length=200)
-      logo = models.ImageField (upload_to='logo_team/', blank=True, null=False)
+      logo = models.ImageField (upload_to='logo_team/', blank=True, null=False, default="default.jpg")
       legendteam = models.BooleanField(null=True, default=False)
       description_team = models.TextField(null=True, blank=True)
       ano_de_criacao_team = models.IntegerField(null=True, blank=True)
@@ -34,7 +34,7 @@ class Pilot(models.Model):
       name = models.CharField(max_length=150)
       pilot_age = models.IntegerField(null=True, blank=True)
       team = models.ForeignKey(Team, on_delete=models.PROTECT, related_name='pilots_team')  
-      avatar = models.ImageField (upload_to='pilots/', blank=True, null=True)
+      avatar = models.ImageField (upload_to='pilots/', blank=True, null=True, default="default.jpg")
       description = models.TextField(null=True, blank=True)
       market_value = models.FloatField(null=True, blank=True) 
       legend = models.BooleanField(null=True, default=False)

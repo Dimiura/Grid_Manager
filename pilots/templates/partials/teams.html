@@ -1,3 +1,5 @@
+{% load static %}
+
 <div class="container" data-aos="fade-up">
   <div class="container-fluid">
     <div class="row">
@@ -23,7 +25,11 @@
         <a href="#" 
         class="btn-view-team" 
         data-url="{% url 'observe_team' team.pk %}">
-          <img src="{{ team.logo.url }}" alt="{{ team.namet }}">
+        {% if team.logo %}
+            <img src="{{ team.logo.url }}" alt="Logo da equipe">
+        {% else %}
+            <img src="{{ MEDIA_URL }}/default.jpg" alt="Logo padrão">
+        {% endif %}
         </a>
       </div>
       {% endfor %}

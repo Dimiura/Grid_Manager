@@ -1,3 +1,5 @@
+{% load static %}
+
 <div class="container">
   <div class="container-fluid">
     <div class="row">
@@ -23,7 +25,11 @@
         <div class="row">
           <div class="col-sm-6">
             <div id="image-display" data-aos="fade-up-right">
-              <img src="{{ pilots.first.avatar.url }}" alt="{{ pilots.first.name }}" id="main-image">
+                {% if pilots.logo %}
+                    <img src="{{ pilot.first.avatar.url }}" alt="Icon do Piloto" id="main-image">
+                {% else %}
+                    <img src="{{ MEDIA_URL }}default.jpg" alt="Logo padrão" id="main-image">
+                {% endif %}
             </div>
           </div>
 
@@ -83,7 +89,11 @@
               <div class="card-pilots-list text-center">
                 <div class="card-pilots-list_container mb-3">
                   <div class="card-pilots-list__image mb-3">
-                    <img src="{{ pilot.avatar.url }}" alt="{{ pilot.name }}" class="img-fluid">
+                    {% if pilots.logo %}
+                    <img src="{{ pilot.avatar.url }}" alt="Icon do Piloto" id="main-image" class='img-fluid'>
+                {% else %}
+                    <img src="{{ MEDIA_URL }}default.jpg" alt="Logo padrão" id="main-image">
+                {% endif %}
                   </div>
                   <div class="card-pilots-list__content">
                     {% if pilot.legend == True %}
